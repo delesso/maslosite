@@ -537,6 +537,7 @@ h4 {
   display: flex;
   -moz-column-gap: 8px;
        column-gap: 8px;
+  align-items: center;
 }
 .banner__body-padding {
   padding-left: 145px !important;
@@ -632,10 +633,27 @@ h4 {
   font-size: 20px;
   margin-bottom: 40px;
 }
+.catalog__card-button {
+  display: flex;
+  align-self: start;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+  align-items: center;
+}
+.catalog__card-button img {
+  padding: 0 !important;
+}
 .catalog__card-price {
   font-weight: 700;
   font-size: 22px;
   color: #ffb800;
+  margin-bottom: 16px;
+}
+.catalog__card-price span {
+  font-weight: 400;
+  font-size: 16px;
+  text-decoration: line-through;
+  color: #c2c5da;
 }
 .catalog__card-item {
   display: flex;
