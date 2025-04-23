@@ -1,0 +1,94 @@
+.banner{
+   margin-top: 30px;
+   margin-bottom: 79px;
+    &__inner{
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+    }
+
+    &__item{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 47px;
+        background-color: #f4f5fa;
+        &:first-child{
+            max-width: 1008px;
+            height: auto;
+            background-image: url(/image/banner.png) ;
+            background-repeat: no-repeat;
+            object-fit: cover;
+            border-radius: 20px;
+            flex-grow: 1;
+        }
+        
+    }
+    &__button{
+        display: flex;
+        column-gap: 8px;
+    }
+    &__body{
+        
+        &-padding{
+            padding-left: 145px !important;
+        }
+    }
+
+    &__img{
+            padding: 25px 67px 9px 0;
+           
+        }
+        &__title{
+            font-size: 36px;
+            padding-bottom: 58px;
+
+            &:not(:first-child){
+                font-size: 16px;
+            }
+        }
+        &__price{
+            font-size: 37px;
+            color: #005bb9;
+        }
+
+        &__list{
+            display: flex;
+                row-gap: 10px;
+                flex-direction: column;
+            .banner__item{
+                background-color: #f4f5fa !important;
+                background-image: none;
+                position: relative;
+                column-gap: 15px;
+                padding: 57px 40px 27px 15px;
+                border-radius: 20px;
+                
+                
+                .banner__title{
+                    font-size: 16px;
+                    font-weight: bold;
+                    padding-bottom: 40px !important;
+                    padding: 0;
+                }
+                .banner__price{
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: #ffb800;
+                    margin-bottom: 10px;
+                    span{
+                        text-decoration: line-through;
+                        color: #c2c5da;
+                    }
+                }
+                .banner__button{
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    margin-right: 15px;
+                    margin-bottom: 20px;
+                }
+            }
+
+        }
+    }

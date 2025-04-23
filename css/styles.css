@@ -1,0 +1,647 @@
+@charset "UTF-8";
+/**
+  Нормализация блочной модели
+ */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+/**
+  Убираем внутренние отступы слева тегам списков,
+  у которых есть атрибут class
+ */
+:where(ul, ol):where([class]) {
+  padding-left: 0;
+}
+
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
+body,
+:where(blockquote, figure):where([class]) {
+  margin: 0;
+}
+
+/**
+  Убираем внешние отступы вертикали нужным тегам,
+  у которых есть атрибут class
+ */
+:where(h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+dl):where([class]) {
+  margin-block: 0;
+}
+
+:where(dd[class]) {
+  margin-left: 0;
+}
+
+:where(fieldset[class]) {
+  margin-left: 0;
+  padding: 0;
+  border: none;
+}
+
+/**
+  Убираем стандартный маркер маркированному списку,
+  у которого есть атрибут class
+ */
+:where(ul[class]) {
+  list-style: none;
+}
+
+:where(address[class]) {
+  font-style: normal;
+}
+
+/**
+  Обнуляем вертикальные внешние отступы параграфа,
+  объявляем локальную переменную для внешнего отступа вниз,
+  чтобы избежать взаимодействие с более сложным селектором
+ */
+p {
+  --paragraphMarginBottom: 24px;
+  margin-block: 0;
+}
+
+/**
+  Внешний отступ вниз для параграфа без атрибута class,
+  который расположен не последним среди своих соседних элементов
+ */
+p:where(:not([class]):not(:last-child)) {
+  margin-bottom: var(--paragraphMarginBottom);
+}
+
+/**
+  Упрощаем работу с изображениями и видео
+ */
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+  Наследуем свойства шрифт для полей ввода
+ */
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+html {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  height: 100%;
+  /**
+    Убираем скачок интерфейса по горизонтали
+    при появлении / исчезновении скроллбара
+   */
+  scrollbar-gutter: stable;
+}
+
+/**
+  Плавный скролл
+ */
+html,
+:has(:target) {
+  scroll-behavior: smooth;
+}
+
+body {
+  /**
+    Пригодится в большинстве ситуаций
+    (когда, например, нужно будет "прижать" футер к низу сайта)
+   */
+  min-height: 100%;
+  /**
+    Унифицированный интерлиньяж
+   */
+  line-height: 1.5;
+}
+
+/**
+  Нормализация высоты элемента ссылки при его инспектировании в DevTools
+ */
+a:where([class]) {
+  display: inline-flex;
+}
+
+/**
+  Курсор-рука при наведении на элемент
+ */
+button,
+label {
+  cursor: pointer;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
+ */
+:where([fill]:not([fill=none],
+[fill^=url])) {
+  fill: currentColor;
+}
+
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
+  stroke: currentColor;
+}
+
+/**
+  Чиним баг задержки смены цвета при взаимодействии с svg-элементами
+ */
+svg * {
+  transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
+}
+
+/**
+  Удаляем все анимации и переходы для людей,
+  которые предпочитают их не использовать
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Medium.ttf") format("ttf");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --color--dark: #191A23;
+  --color-light: #FFFFFF;
+  --color--accent: #b9ff66;
+  --color-grey: #f3f3f3;
+  --color--grey-alt: #898989;
+  --color--dark-alt: #292A32;
+  --border: 1px solid var(--color-dark);
+  --border-radius: 14px;
+  --border-radius-small: 7px;
+  --border-radius-large: 45px;
+  --shadow: 0 5px 0 0 var(--color-dark);
+  --font-family-base: "Roboto", sans-serif;
+  --container-width: 1353px;
+  --container-padding-x: 20px;
+  --section-padding-y: 70px ;
+  --input-height: 59px;
+  --button-height: 68px;
+  --transition-duration: 0.2s;
+}
+@media (max-width: 1280px) {
+  :root {
+    --section-padding-y: 50px ;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --section-padding-y: 30px ;
+  }
+}
+
+.container {
+  max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-x);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  -webkit-clip-path: inset(100%) !important;
+          clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 767px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .visible-mobile {
+    display: none !important;
+  }
+}
+
+body {
+  font-size: clamp(10px, 0.9722222222vw, 14px);
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  line-height: 1.28;
+  color: var(--color--dark);
+  background-color: var(--color-light);
+}
+
+a,
+button,
+input,
+textarea,
+svg * {
+  transition-duration: var(--transition-duration);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border-radius: 6px;
+  background-color: #005bb9;
+  padding: 18px 30px;
+  border: none;
+  color: white;
+  font-weight: 700;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: clamp(43px, 4.1666666667vw, 60px);
+}
+
+h2 {
+  font-size: clamp(14px, 1.6666666667vw, 24px);
+}
+
+h3 {
+  font-size: clamp(24px, 2.0833333333vw, 30px);
+}
+
+h4 {
+  font-size: clamp(18px, 1.3888888889vw, 20px);
+}
+
+.header {
+  background-color: #0F2438;
+  color: white;
+}
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.header__info-list {
+  display: flex;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  align-items: center;
+}
+.header__info-item {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 4px;
+       column-gap: 4px;
+}
+@media (hover: hover) {
+  .header__info-link:hover {
+    position: relative;
+  }
+  .header__info-link:hover::after {
+    width: 100%;
+  }
+}
+@media (hover: none) {
+  .header__info-link:active {
+    position: relative;
+  }
+  .header__info-link:active::after {
+    width: 100%;
+  }
+}
+.header__info-link::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition-duration: inherit;
+}
+.header__menu-list {
+  display: flex;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  align-items: center;
+}
+@media (hover: hover) {
+  .header__menu-link:hover {
+    position: relative;
+  }
+  .header__menu-link:hover::after {
+    width: 100%;
+  }
+}
+@media (hover: none) {
+  .header__menu-link:active {
+    position: relative;
+  }
+  .header__menu-link:active::after {
+    width: 100%;
+  }
+}
+.header__menu-link::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  translate: -50%;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition-duration: inherit;
+}
+
+.store-info {
+  padding: 41px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.store-info__item {
+  display: flex;
+  align-items: center;
+}
+.store-info__item:nth-child(-n+1) p {
+  text-align: start;
+}
+.store-info__item:nth-child(n+2) {
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+}
+.store-info__item:nth-child(4) {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #E1EFD0;
+}
+.store-info__item:nth-child(4) :hover {
+  opacity: 0.7;
+}
+.store-info__item:nth-child(n+5) a {
+  font-size: 20px;
+}
+.store-info__item p {
+  text-align: end;
+}
+.store-info__item h2 {
+  margin: 0;
+}
+.store-info__item img {
+  padding: 7px;
+}
+
+.store-menu__inner {
+  display: flex;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+.store-menu__catalog {
+  display: flex;
+}
+.store-menu__search {
+  width: 100%;
+}
+.store-menu__search input {
+  width: 80%;
+  padding: 18px 19px;
+  border: none;
+  background-color: #F4F5FA;
+  border-radius: 6px 0 0 6px;
+}
+.store-menu__button {
+  display: flex;
+  -moz-column-gap: 12px;
+       column-gap: 12px;
+  border-radius: 0 6px 6px 0;
+}
+.store-menu__list {
+  display: flex;
+  align-items: center;
+}
+.store-menu__item {
+  display: flex;
+  align-items: center;
+  padding-inline: 25px;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+}
+.store-menu__item-inner {
+  display: flex;
+  align-items: center;
+  padding-inline: 25px;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+}
+.store-menu__item-inner:not(:nth-child(n+2)) {
+  padding-left: 0;
+}
+.store-menu__item-inner:last-child {
+  padding-right: 0;
+}
+.store-menu__item:not(:nth-child(n+3)) {
+  border-left: 1px solid #e1e5f8;
+  border-right: 1px solid #e1e5f8;
+}
+.store-menu__item:first-child {
+  border: none;
+}
+
+.banner {
+  margin-top: 30px;
+  margin-bottom: 79px;
+}
+.banner__inner {
+  display: flex;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+  align-items: center;
+}
+.banner__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -moz-column-gap: 47px;
+       column-gap: 47px;
+  background-color: #f4f5fa;
+}
+.banner__item:first-child {
+  max-width: 1008px;
+  height: auto;
+  background-image: url(/image/banner.png);
+  background-repeat: no-repeat;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 20px;
+  flex-grow: 1;
+}
+.banner__button {
+  display: flex;
+  -moz-column-gap: 8px;
+       column-gap: 8px;
+}
+.banner__body-padding {
+  padding-left: 145px !important;
+}
+.banner__img {
+  padding: 25px 67px 9px 0;
+}
+.banner__title {
+  font-size: 36px;
+  padding-bottom: 58px;
+}
+.banner__title:not(:first-child) {
+  font-size: 16px;
+}
+.banner__price {
+  font-size: 37px;
+  color: #005bb9;
+}
+.banner__list {
+  display: flex;
+  row-gap: 10px;
+  flex-direction: column;
+}
+.banner__list .banner__item {
+  background-color: #f4f5fa !important;
+  background-image: none;
+  position: relative;
+  -moz-column-gap: 15px;
+       column-gap: 15px;
+  padding: 57px 40px 27px 15px;
+  border-radius: 20px;
+}
+.banner__list .banner__item .banner__title {
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 40px !important;
+  padding: 0;
+}
+.banner__list .banner__item .banner__price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffb800;
+  margin-bottom: 10px;
+}
+.banner__list .banner__item .banner__price span {
+  text-decoration: line-through;
+  color: #c2c5da;
+}
+.banner__list .banner__item .banner__button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.offers {
+  margin-bottom: 70px;
+}
+.offers__header-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.offers-card {
+  display: flex;
+  justify-content: space-between;
+}
+.offers-card-item {
+  display: flex;
+  -moz-column-gap: 79px;
+       column-gap: 79px;
+  border: 1px solid #e1e5f8;
+  border-radius: 6px;
+}
+.offers-card__title {
+  padding: 30px;
+  padding-right: 0 !important;
+}
+.offers-card__title h3 {
+  font-size: 24px;
+}
+
+.catalog__card {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  -moz-column-gap: 30px;
+       column-gap: 30px;
+  row-gap: 40px;
+}
+.catalog__card-title {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+.catalog__card-price {
+  font-weight: 700;
+  font-size: 22px;
+  color: #ffb800;
+}
+.catalog__card-item {
+  display: flex;
+  flex-direction: column;
+  max-width: 316px;
+}
+.catalog__card-item img {
+  padding-right: 30px;
+}/*# sourceMappingURL=styles.css.map */

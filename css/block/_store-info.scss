@@ -1,0 +1,48 @@
+.store-info{
+    padding: 41px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__item{
+        display: flex;
+        align-items: center;
+
+
+        &:nth-child(-n+1){
+            p{
+                text-align: start;
+            }
+        }
+         &:nth-child(n+2){
+            column-gap: 10px;
+    }
+    &:nth-child(4){
+        padding: 8px 16px;
+        cursor: pointer;
+        background-color: #E1EFD0;
+
+        :hover{
+            opacity: 0.7;
+        }
+    }
+
+
+    &:nth-child(n+5){
+        a{
+            font-size: 20px;
+        }
+}
+        p{
+            text-align: end;
+        }
+
+        h2{
+            margin: 0;
+        }
+
+        img{
+            padding: 7px;
+        }
+    }
+}
