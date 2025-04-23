@@ -1,0 +1,28 @@
+.offers{
+    margin-bottom: 70px;
+    &__header-title{
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+
+    &-card{
+        display: flex;
+        justify-content: space-between;
+
+        &-item{
+            display: flex;
+            column-gap: 79px;
+            border: 1px solid #e1e5f8;
+            border-radius: 6px;
+        }
+
+        &__title{
+            padding: 30px;
+            padding-right: 0 !important;
+            h3{
+                font-size: 24px;
+            }
+        }
+    }
+}
