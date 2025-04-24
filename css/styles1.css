@@ -679,3 +679,133 @@ h4 {
 #addToCartBtn:hover {
   background-color: #45a049;
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Табы */
+.auth-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #0F2438;
+  position: relative;
+}
+
+.tab-btn.active {
+  font-weight: bold;
+}
+
+.tab-btn.active:after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #4CAF50;
+}
+
+/* Формы */
+.auth-form {
+  display: none;
+}
+
+.auth-form.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #0F2438;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.auth-form h3 {
+  color: #0F2438;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info span {
+  color: #0F2438;
+  font-weight: 500;
+}
+
+.logout-link {
+  color: #0F2438;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.logout-link:hover {
+  text-decoration: underline;
+}
+.alert {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.alert-error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}

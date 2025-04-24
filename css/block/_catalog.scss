@@ -12,29 +12,10 @@
             margin-bottom: 40px;
         }
 
-        &-button{
-            display: flex;
-            align-self: start;
-            column-gap: 8px;
-            align-items: center;
-
-            img{
-                padding: 0 !important;
-            }
-        }
-
         &-price{
             font-weight: 700;
             font-size: 22px;
             color: #ffb800;
-            margin-bottom: 16px;
-
-            span{
-                font-weight: 400;
-                font-size: 16px;
-                text-decoration: line-through;
-                color: #c2c5da;
-            }
         }
 
         &-item{
