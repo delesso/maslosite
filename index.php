@@ -1,5 +1,15 @@
 <?php
 session_start();
+require_once __DIR__ . '/config/db.php';
+foreach ($products as &$product) {
+    if (!empty($product['image_path'])) {
+        $full_path = $_SERVER['DOCUMENT_ROOT'] . '/' . $product['image_path'];
+        if (!file_exists($full_path)) {
+            $product['image_path'] = null;
+        }
+    }
+}
+unset($product);
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -250,17 +260,28 @@ session_start();
                     Подборки товаров
                 </button>
                 <div class="catalog__card">
-                    <div class="catalog__card-item">
-                        <img src="./image/disk-large.png" alt="">
-                        <div class="catalog__card-title">
-                            <p>Комплект фрикционных дисков</p>
-                        </div>
-                        <div class="catalog__card-price">4 430₽ <span>5 430₽</span></div>
-                        <button class="catalog__card-button button " id="addToCartBtn">
-                            <img src="/image/korz-small.svg" alt="" srcset="">
-                            <p>В корзину</p>
-                        </button>
-                    </div>
+                <?php foreach ($products as $product): ?>
+        <div class="catalog__card-item">
+            <?php if (!empty($product['image_path'])): ?>
+                <img src="/<?= htmlspecialchars($product['image_path']) ?>" 
+                     alt="<?= htmlspecialchars($product['name']) ?>">
+            <?php endif; ?>
+            <div class="catalog__card-title">
+                <p><?= htmlspecialchars($product['name']) ?></p>
+            </div>
+            <div class="catalog__card-price">
+                <?= number_format($product['price'], 2, '.', ' ') ?>₽
+                <?php if (!empty($product['old_price'])): ?>
+                    <span><?= number_format($product['old_price'], 2, '.', ' ') ?>₽</span>
+                <?php endif; ?>
+            </div>
+            <button class="catalog__card-button button add-to-cart" data-product-id="<?= $product['id'] ?>">
+                <img src="/image/korz-small.svg" alt="">
+                <p>В корзину</p>
+            </button>
+        </div>
+    <?php endforeach; ?>
+</div>
                 </div>
             </div>
         </section>
@@ -281,7 +302,12 @@ session_start();
     </div>
     
     <div id="login" class="auth-form active">
-      <h3>Вход в аккаунт</h3>
+    <h3>Вход в аккаунт</h3>
+    <?php if(isset($_SESSION['login_error'])): ?>
+        <div class="alert alert-error" style="position: static; margin-bottom: 15px;">
+            <?= $_SESSION['login_error']; unset($_SESSION['login_error']); ?>
+        </div>
+    <?php endif; ?>
       <form action="auth/login.php" method="POST">
         <div class="form-group">
           <label for="loginEmail">Email</label>
